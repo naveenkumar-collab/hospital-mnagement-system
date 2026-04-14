@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from pymongo.database import Database
 from typing import List
-from .. import crud, models, schemas
+from .. import crud, schemas
 from ..database import get_db
 
 router = APIRouter(
@@ -10,30 +10,30 @@ router = APIRouter(
 )
 
 @router.post("/", response_model=schemas.Patient)
-def create_patient(patient: schemas.PatientCreate, db: Session = Depends(get_db)):
+def create_patient(patient: schemas.PatientCreate, db: Database = Depends(get_db)):
     return crud.create_patient(db=db, patient=patient)
 
 @router.get("/", response_model=List[schemas.Patient])
-def read_patients(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def read_patients(skip: int = 0, limit: int = 100, db: Database = Depends(get_db)):
     patients = crud.get_patients(db, skip=skip, limit=limit)
     return patients
 
 @router.get("/{patient_id}", response_model=schemas.Patient)
-def read_patient(patient_id: int, db: Session = Depends(get_db)):
+def read_patient(patient_id: str, db: Database = Depends(get_db)):
     db_patient = crud.get_patient(db, patient_id=patient_id)
     if db_patient is None:
         raise HTTPException(status_code=404, detail="Patient not found")
     return db_patient
 
 @router.put("/{patient_id}", response_model=schemas.Patient)
-def update_patient(patient_id: int, patient: schemas.PatientCreate, db: Session = Depends(get_db)):
+def update_patient(patient_id: str, patient: schemas.PatientCreate, db: Database = Depends(get_db)):
     db_patient = crud.update_patient(db, patient_id, patient)
     if not db_patient:
         raise HTTPException(status_code=404, detail="Patient not found")
     return db_patient
 
 @router.delete("/{patient_id}", response_model=schemas.Patient)
-def delete_patient(patient_id: int, db: Session = Depends(get_db)):
+def delete_patient(patient_id: str, db: Database = Depends(get_db)):
     db_patient = crud.delete_patient(db, patient_id)
     if not db_patient:
         raise HTTPException(status_code=404, detail="Patient not found")

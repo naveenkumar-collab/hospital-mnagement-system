@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List, Optional
 from datetime import date, time
 
@@ -14,9 +14,8 @@ class PatientCreate(PatientBase):
     pass
 
 class Patient(PatientBase):
-    patient_id: int
-    class Config:
-        from_attributes = True
+    patient_id: str
+    model_config = ConfigDict(from_attributes=True)
 
 # Doctor
 class DoctorBase(BaseModel):
@@ -29,14 +28,13 @@ class DoctorCreate(DoctorBase):
     pass
 
 class Doctor(DoctorBase):
-    doctor_id: int
-    class Config:
-        from_attributes = True
+    doctor_id: str
+    model_config = ConfigDict(from_attributes=True)
 
 # Appointment
 class AppointmentBase(BaseModel):
-    patient_id: int
-    doctor_id: int
+    patient_id: str
+    doctor_id: str
     date: date
     time: time
     status: str
@@ -45,13 +43,12 @@ class AppointmentCreate(AppointmentBase):
     pass
 
 class Appointment(AppointmentBase):
-    appointment_id: int
-    class Config:
-        from_attributes = True
+    appointment_id: str
+    model_config = ConfigDict(from_attributes=True)
 
 # Billing
 class BillingBase(BaseModel):
-    patient_id: int
+    patient_id: str
     amount: float
     payment_status: str
     date: date
@@ -60,6 +57,5 @@ class BillingCreate(BillingBase):
     pass
 
 class Billing(BillingBase):
-    bill_id: int
-    class Config:
-        from_attributes = True
+    bill_id: str
+    model_config = ConfigDict(from_attributes=True)
