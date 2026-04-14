@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-hospital"></i>
+            <h2>HMS Dashboard</h2>
+        </div>
+        <ul class="nav">
+            <li class="active"><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="patient.html"><i class="fa-solid fa-bed"></i> Patients</a></li>
+            <li><a href="doctor.html"><i class="fa-solid fa-user-doctor"></i> Doctors</a></li>
+            <li><a href="appointment.html"><i class="fa-solid fa-calendar-check"></i> Appointments</a></li>
+            <li><a href="billing.html"><i class="fa-solid fa-file-invoice-dollar"></i> Billing</a></li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <div class="header-title">
+                <h1>Dashboard Overview</h1>
+                <p>Welcome back! Here's what's happening today.</p>
+            </div>
+        </header>
+        
+        <div class="stats-cards">
+            <div class="card">
+                <div class="card-icon blue"><i class="fa-solid fa-bed"></i></div>
+                <div class="card-info">
+                    <h3 id="patient-count">0</h3>
+                    <p>Total Patients</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon green"><i class="fa-solid fa-user-doctor"></i></div>
+                <div class="card-info">
+                    <h3 id="doctor-count">0</h3>
+                    <p>Total Doctors</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon purple"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="card-info">
+                    <h3 id="appointment-count">0</h3>
+                    <p>Appointments</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon red"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <div class="card-info">
+                    <h3 id="billing-count">0</h3>
+                    <p>Total Bills</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-sections">
+            <div class="section-box">
+                <div class="section-header">
+                    <h2>Recent Appointments</h2>
+                    <a href="appointment.html" class="btn-sm">View All</a>
+                </div>
+                <table id="recent-appointments-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Patient</th>
+                            <th>Doctor</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will come here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', fetchDashboardStats);
+    </script>
+</body>
+</html>

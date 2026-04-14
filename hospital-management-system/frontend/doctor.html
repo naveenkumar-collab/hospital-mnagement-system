@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors - Hospital Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-hospital"></i>
+            <h2>HMS Dashboard</h2>
+        </div>
+        <ul class="nav">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a></li>
+            <li><a href="patient.html"><i class="fa-solid fa-bed"></i> <span>Patients</span></a></li>
+            <li class="active"><a href="doctor.html"><i class="fa-solid fa-user-doctor"></i> <span>Doctors</span></a></li>
+            <li><a href="appointment.html"><i class="fa-solid fa-calendar-check"></i> <span>Appointments</span></a></li>
+            <li><a href="billing.html"><i class="fa-solid fa-file-invoice-dollar"></i> <span>Billing</span></a></li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <div class="header-title">
+                <h1>Doctor Management</h1>
+                <p>Manage hospital medical staff</p>
+            </div>
+            <button class="btn" onclick="openModal('doctorModal')">
+                <i class="fa-solid fa-plus"></i> Add Doctor
+            </button>
+        </header>
+
+        <div class="section-box">
+            <table id="doctors-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Specialization</th>
+                        <th>Phone</th>
+                        <th>Experience (Yrs)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="doctorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="doctorModalTitle">Add New Doctor</h2>
+                <button class="close-modal" onclick="closeModal('doctorModal')">&times;</button>
+            </div>
+            <form id="doctorForm" onsubmit="event.preventDefault(); saveDoctor();">
+                <input type="hidden" id="doctorId">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="doctorName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Specialization</label>
+                    <input type="text" id="doctorSpecialization" class="form-control" required>
+                </div>
+                <div style="display:flex; gap:15px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Phone Number</label>
+                        <input type="text" id="doctorPhone" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Experience (Years)</label>
+                        <input type="number" id="doctorExperience" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-sm" style="background:#f1f5f9; color:#64748b;" onclick="closeModal('doctorModal')">Cancel</button>
+                    <button type="submit" class="btn">Save Doctor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', fetchDoctors);
+    </script>
+</body>
+</html>

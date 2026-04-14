@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - Hospital Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-hospital"></i>
+            <h2>HMS Dashboard</h2>
+        </div>
+        <ul class="nav">
+            <li><a href="index.html"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a></li>
+            <li><a href="patient.html"><i class="fa-solid fa-bed"></i> <span>Patients</span></a></li>
+            <li><a href="doctor.html"><i class="fa-solid fa-user-doctor"></i> <span>Doctors</span></a></li>
+            <li class="active"><a href="appointment.html"><i class="fa-solid fa-calendar-check"></i> <span>Appointments</span></a></li>
+            <li><a href="billing.html"><i class="fa-solid fa-file-invoice-dollar"></i> <span>Billing</span></a></li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <div class="header-title">
+                <h1>Appointment Management</h1>
+                <p>Schedule and manage patient appointments</p>
+            </div>
+            <button class="btn" onclick="openModal('appointmentModal'); fetchDropdownData();">
+                <i class="fa-solid fa-plus"></i> Book Appointment
+            </button>
+        </header>
+
+        <div class="section-box">
+            <table id="appointments-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient ID</th>
+                        <th>Doctor ID</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="appointmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="appointmentModalTitle">Book Appointment</h2>
+                <button class="close-modal" onclick="closeModal('appointmentModal')">&times;</button>
+            </div>
+            <form id="appointmentForm" onsubmit="event.preventDefault(); saveAppointment();">
+                <input type="hidden" id="appointmentId">
+                <div class="form-group">
+                    <label>Patient</label>
+                    <select id="appointmentPatient" class="form-control" required>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Doctor</label>
+                    <select id="appointmentDoctor" class="form-control" required>
+                    </select>
+                </div>
+                <div style="display:flex; gap:15px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Date</label>
+                        <input type="date" id="appointmentDate" class="form-control" required>
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>Time</label>
+                        <input type="time" id="appointmentTime" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="appointmentStatus" class="form-control">
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-sm" style="background:#f1f5f9; color:#64748b;" onclick="closeModal('appointmentModal')">Cancel</button>
+                    <button type="submit" class="btn">Save Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', fetchAppointments);
+    </script>
+</body>
+</html>
