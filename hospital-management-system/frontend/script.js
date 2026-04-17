@@ -90,8 +90,8 @@ async function fetchPatients() {
                 <td>${p.phone}</td>
                 <td>${p.address}</td>
                 <td>
-                    <button class="btn-icon btn-edit" onclick="editPatient(${p.patient_id})"><i class="fa-solid fa-pen"></i></button>
-                    <button class="btn-icon btn-delete" onclick="deletePatient(${p.patient_id})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn-icon btn-edit" onclick="editPatient('${p.patient_id}')"><i class="fa-solid fa-pen"></i></button>
+                    <button class="btn-icon btn-delete" onclick="deletePatient('${p.patient_id}')"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         `;
@@ -152,8 +152,8 @@ async function fetchDoctors() {
                 <td>${d.phone}</td>
                 <td>${d.experience} Years</td>
                 <td>
-                    <button class="btn-icon btn-edit" onclick="editDoctor(${d.doctor_id})"><i class="fa-solid fa-pen"></i></button>
-                    <button class="btn-icon btn-delete" onclick="deleteDoctor(${d.doctor_id})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn-icon btn-edit" onclick="editDoctor('${d.doctor_id}')"><i class="fa-solid fa-pen"></i></button>
+                    <button class="btn-icon btn-delete" onclick="deleteDoctor('${d.doctor_id}')"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         `;
@@ -221,8 +221,8 @@ async function fetchAppointments() {
                 <td>${a.time}</td>
                 <td><span class="badge badge-${a.status === 'Completed' ? 'success' : (a.status === 'Cancelled' ? 'danger' : 'warning')}">${a.status}</span></td>
                 <td>
-                    <button class="btn-icon btn-edit" onclick="editAppointment(${a.appointment_id})"><i class="fa-solid fa-pen"></i></button>
-                    <button class="btn-icon btn-delete" onclick="deleteAppointment(${a.appointment_id})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn-icon btn-edit" onclick="editAppointment('${a.appointment_id}')"><i class="fa-solid fa-pen"></i></button>
+                    <button class="btn-icon btn-delete" onclick="deleteAppointment('${a.appointment_id}')"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         `;
@@ -248,8 +248,8 @@ async function saveAppointment() {
     if(timeVal.length === 5) timeVal += ':00';
     
     const body = {
-        patient_id: parseInt(document.getElementById('appointmentPatient').value),
-        doctor_id: parseInt(document.getElementById('appointmentDoctor').value),
+        patient_id: document.getElementById('appointmentPatient').value,
+        doctor_id: document.getElementById('appointmentDoctor').value,
         date: document.getElementById('appointmentDate').value,
         time: timeVal,
         status: document.getElementById('appointmentStatus').value
@@ -305,8 +305,8 @@ async function fetchBillings() {
                 <td>${b.date}</td>
                 <td><span class="badge badge-${b.payment_status === 'Paid' ? 'success' : (b.payment_status === 'Cancelled' ? 'danger' : 'warning')}">${b.payment_status}</span></td>
                 <td>
-                    <button class="btn-icon btn-edit" onclick="editBilling(${b.bill_id})"><i class="fa-solid fa-pen"></i></button>
-                    <button class="btn-icon btn-delete" onclick="deleteBilling(${b.bill_id})"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn-icon btn-edit" onclick="editBilling('${b.bill_id}')"><i class="fa-solid fa-pen"></i></button>
+                    <button class="btn-icon btn-delete" onclick="deleteBilling('${b.bill_id}')"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         `;
@@ -324,7 +324,7 @@ async function fetchBillingDropdownData() {
 async function saveBilling() {
     const id = document.getElementById('billId').value;
     const body = {
-        patient_id: parseInt(document.getElementById('billingPatient').value),
+        patient_id: document.getElementById('billingPatient').value,
         amount: parseFloat(document.getElementById('billingAmount').value),
         payment_status: document.getElementById('billingStatus').value,
         date: document.getElementById('billingDate').value
