@@ -1,8 +1,4 @@
 from pymongo import MongoClient
 
-MONGO_DETAILS = "mongodb://localhost:27017"
-client = MongoClient(MONGO_DETAILS)
-db = client.hospital_db
-
-def get_db():
-    yield db
+client = MongoClient("mongodb+srv://naveenkumar:XJ99AGOx8SV14YtZ@cluster0.pligakl.mongodb.net/hospital?retryWrites=true&w=majority")
+db = client["hospital"]
