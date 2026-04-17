@@ -1,4 +1,4 @@
-const API_URL = 'https://hospital-management-system.onrender.com';
+const API_URL = 'http://localhost:8000';
 
 // Modals
 function openModal(modalId) {
